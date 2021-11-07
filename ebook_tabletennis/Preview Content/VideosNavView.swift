@@ -11,11 +11,14 @@ import AVKit
 struct VideosNavView: View {
     let input:Videos
     var body: some View {
-        let player = AVPlayer(url:Bundle.main.url(forResource: input.fileName, withExtension: input.fileType)!)
-        VideoPlayer(player: player)
-        //.onAppear() {
-            //player.play()
-        //}
+        let vplayer = AVPlayer(url:Bundle.main.url(forResource: input.fileName, withExtension: input.fileType)!)
+        VideoPlayer(player: vplayer)
+            .onDisappear() {
+                vplayer.pause()
+            }
+            .onAppear() {
+                vplayer.play()
+            }
     }
 }
 
